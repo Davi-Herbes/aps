@@ -7,16 +7,22 @@ class Usuario
 
   public int $id;
 
-  public function __construct(public string $login, public string $senha) {}
+  public function __construct(
+    public string $nome,
+    public string $sobrenome,
+    public string $login,
+    public string $email,
+    public string $senha
+  ) {}
 
   public function save(): bool
   {
     $conexao = new MySQL();
     $this->senha = password_hash($this->senha, PASSWORD_BCRYPT);
     if (isset($this->id)) {
-      $sql = "UPDATE usuario SET login = '{$this->login}' ,senha = '{$this->senha}' WHERE id = {$this->id}";
+      $sql = "UPDATE usuario SET nome = '{$this->nome}', sobrenome = '{$this->sobrenome}', login = '{$this->login}' ,email = '{$this->email}',senha = '{$this->senha}' WHERE id = {$this->id}";
     } else {
-      $sql = "INSERT INTO usuario (login,senha) VALUES ('{$this->login}','{$this->senha}')";
+      $sql = "INSERT INTO usuario (nome, sobrenome, login, email, senha) VALUES ('{$this->nome}', '{$this->sobrenome}', '{$this->login}' ,'{$this->email}','{$this->senha}')";
     }
     return $conexao->executa($sql);
   }
@@ -34,7 +40,9 @@ class Usuario
 
   public static function usuarioFromConsulta($resultado): Usuario
   {
-    $usuario = new Usuario($resultado[0]['login'], $resultado[0]['senha']);
+    $r = $resultado[0];
+
+    $usuario = new Usuario($r["nome"], $r["sobrenome"], $r['login'], $r['email'], $r['senha']);
     $usuario->id = $resultado[0]['id'];
     return $usuario;
   }
