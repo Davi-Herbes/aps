@@ -11,6 +11,7 @@ class MySQL
   {
     $this->connection = new \mysqli(HOST, USUARIO, SENHA, BANCO, PORTA);
     $this->connection->set_charset("utf8");
+    mysqli_report(MYSQLI_REPORT_OFF);
   }
 
   public function executa($sql)

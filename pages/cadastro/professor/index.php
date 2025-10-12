@@ -10,7 +10,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro Aluno</title>
+  <title>Cadastro Professor</title>
   <link rel="stylesheet" href="/ana/public/global.css">
   <link rel="stylesheet" href="/ana/pages/cadastro/styles.css">
 </head>
@@ -26,7 +26,7 @@
       <div class="form-container">
 
 
-        <h1>Dados de aluno</h1>
+        <h1>Dados do Professor</h1>
         <form action="/ana/src/utils/cadastrar.php" method="post">
           <label class="label" for="matricula">Matricula: <input id="matricula" name="matricula" type="text"></label>
           <fieldset class="label">

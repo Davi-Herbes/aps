@@ -9,3 +9,10 @@ ALTER TABLE `empresa` MODIFY COLUMN `id` INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `representante_empresa` MODIFY COLUMN `id` INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `supervisor` MODIFY COLUMN `id` INT NOT NULL AUTO_INCREMENT;
 ```
+
+botar o email como unique:
+
+```sql
+ALTER TABLE usuario
+ADD CONSTRAINT nome_unico UNIQUE (email);
+```

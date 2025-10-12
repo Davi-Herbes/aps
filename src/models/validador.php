@@ -31,7 +31,7 @@ class Validador
     }
   }
 
-  public function validate_string(string $valor_campo, string $nome_campo, string &$erro)
+  public function validate_string($valor_campo, string $nome_campo, string &$erro)
   {
     if (gettype($valor_campo) !== "string") {
       $erro = "O campo $nome_campo é obrigatório.";
@@ -39,10 +39,19 @@ class Validador
     }
   }
 
-  public function validate_int(string $valor_campo, string $nome_campo, string &$erro)
+  public function validate_int($valor_campo, string $nome_campo, string &$erro)
   {
     if (gettype($valor_campo) !== "int") {
       $erro = "O campo $nome_campo é obrigatório.";
+      $this->valido = false;
+    }
+  }
+
+  public function validate_enum($valor_campo, string $nome_campo, string &$erro, array $valores_permitidos)
+  {
+    if (!in_array($valor_campo, $valores_permitidos, true)) {
+      $erro = "O campo $nome_campo deve estar entre os valores permitidos: "
+        . implode(", ", $valores_permitidos) . ".";
       $this->valido = false;
     }
   }

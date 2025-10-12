@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . "/cadastrar.php";
 require_once __DIR__ . "/../../src/models/usuario/validador.php";
 session_start();
 
@@ -32,12 +31,10 @@ if (isset($_SESSION["validador"])) {
     </header>
     <div class="main-section">
       <div class="form-container">
-
-
         <div class="title-container">
           <h1>Dados de usuário</h1>
         </div>
-        <form action="/ana/pages/cadastro/aluno/" method="post">
+        <form action="/ana/pages/cadastro/cadastrar.php" method="post">
           <label class="label" for="nome">
             Nome:
             <input id="nome" name="nome" type="text">
@@ -66,6 +63,26 @@ if (isset($_SESSION["validador"])) {
             <input id="senha" name="senha" type="password">
             <p class="error-msg"><?php echo $validador_usuario->erro_senha ?></p>
           </label>
+
+          <div class="label">
+            <fieldset>
+              <legend>Tipo:</legend>
+              <label for="aluno">
+                Aluno
+                <input type="radio" name="tipo-usuario" value="aluno" id="aluno">
+              </label>
+              <label for="professor">
+                Professor
+                <input type="radio" name="tipo-usuario" value="professor" id="professor">
+              </label>
+              <label for="admin">
+                Admin
+                <input type="radio" name="tipo-usuario" value="admin" id="admin">
+              </label>
+            </fieldset>
+
+            <p class="error-msg"><?php echo $validador_usuario->erro_tipo ?></p>
+          </div>
 
           <div class="button-container">
             <button type="submit">Enviar</button>
