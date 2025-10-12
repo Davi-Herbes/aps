@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "\..\config\db\MySQL.php";
-require_once __DIR__ . "\Usuario.php";
+require_once __DIR__ . "/../../config/db/MySQL.php";
+require_once __DIR__ . "/../usuario/Usuario.php";
 
 class Aluno
 {

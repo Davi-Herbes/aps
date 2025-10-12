@@ -6,7 +6,7 @@
   border-radius: 4px;
 
   padding: 20px;
-  height: 60vh;
+  height: 80vh;
   width: 60%;
 
   display: grid;
@@ -34,7 +34,8 @@ fieldset {
 .error-msg {
   color: red;
   font-weight: 700;
-  font-size: 20px;
+  height: 40%;
+  font-size: 15px;
 }
 
 .label {

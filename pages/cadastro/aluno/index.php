@@ -1,33 +1,8 @@
 <?php
 
-require_once __DIR__ . "/../../src/models/Usuario.php";
+require_once __DIR__ . "/../cadastrar.php";
 
-$nome = $_POST["nome"];
-$sobrenome = $_POST["sobrenome"];
-$login = $_POST["login"];
-$email = $_POST["email"];
-$senha = $_POST["senha"];
-
-$fields = [$login, $senha, $nome, $sobrenome, $email];
-
-function retornar_erro()
-{
-  header("Location: /ana/pages/cadastro?error=true");
-  exit;
-}
-
-foreach ($fields as $field) {
-  if (!$field) {
-    retornar_erro();
-  }
-}
-
-$user = new Usuario($nome, $sobrenome, $login, $email, $senha);
-$result = $user->save();
-
-if (!$result) {
-  retornar_erro();
-}
+cadastrar();
 
 ?>
 

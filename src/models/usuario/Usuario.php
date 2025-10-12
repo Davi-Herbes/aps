@@ -1,21 +1,33 @@
 <?php
 
-require_once __DIR__ . "\..\config\db\MySQL.php";
-require_once __DIR__ . "\Usuario.php";
+require_once __DIR__ . "/../../config/db/MySQL.php";
+require_once __DIR__ . "/validador.php";
 
-class Admin
+class Usuario
 {
 
-  public function __construct(public int $usuario_id) {}
+  public int $id;
+
+  public function __construct(
+    public string $nome = "",
+    public string $sobrenome = "",
+    public string $login = "",
+    public string $email = "",
+    public string $senha = ""
+  ) {}
 
   public function save(): bool
   {
     $conexao = new MySQL();
     $this->senha = password_hash($this->senha, PASSWORD_BCRYPT);
-    $sql = "INSERT INTO admin (Usuario_id) VALUES ('{$this->login}','{$this->senha}')";
-
+    if (isset($this->id)) {
+      $sql = "UPDATE usuario SET nome = '{$this->nome}', sobrenome = '{$this->sobrenome}', login = '{$this->login}' ,email = '{$this->email}',senha = '{$this->senha}' WHERE id = {$this->id}";
+    } else {
+      $sql = "INSERT INTO usuario (nome, sobrenome, login, email, senha) VALUES ('{$this->nome}', '{$this->sobrenome}', '{$this->login}' ,'{$this->email}','{$this->senha}')";
+    }
     return $conexao->executa($sql);
   }
+
 
 
   public static function find($id): Usuario
@@ -29,9 +41,11 @@ class Admin
 
   public static function usuarioFromConsulta($resultado): Usuario
   {
-    $u = new Usuario($resultado[0]['login'], $resultado[0]['senha']);
-    $u->id = $resultado[0]['id'];
-    return $u;
+    $r = $resultado[0];
+
+    $usuario = new Usuario($r["nome"], $r["sobrenome"], $r['login'], $r['email'], $r['senha']);
+    $usuario->id = $resultado[0]['id'];
+    return $usuario;
   }
 
   public static function findBylogin($login): Usuario
