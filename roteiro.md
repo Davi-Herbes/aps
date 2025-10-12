@@ -1,13 +1,13 @@
-# git
+# Git
 
 - O Git é um sistema de controle de versões que permite gerenciar diferentes ramificações (branches) dentro de um mesmo projeto.
 - Ele passa a funcionar no seu projeto a partir do momento em que você o inicializa como um repositório.
 - Você pode criar um repositório remoto em outra máquina para armazenar o código do seu repositório local.
 - O GitHub é uma plataforma online que hospeda repositórios remotos em seus servidores.
 
-1- Primeiro você cria uma pasta no xampp/htdocs/ (por exemplo: xampp/htdocs/trabalho/), onde vai ser o projeto
-2- agora, você tem que abrir esse pasta que você criou no vscode e abrir o terminal com Ctrl + Shift + C
-3- digite esses códigos para criar o repositório:
+1- Primeiro você cria uma pasta no xampp/htdocs/ (por exemplo: xampp/htdocs/trabalho/), onde vai ser o projeto<br>
+2- agora, você tem que abrir esse pasta que você criou no vscode e abrir o terminal com Ctrl + Shift + C<br>
+3- digite esses códigos para criar o repositório:<br>
 
 ```bash
 # Inicializa o repositório na pasta atual (.)
