@@ -6,6 +6,7 @@ require_once __DIR__ . "/validador.php";
 class Usuario
 {
 
+  private bool $saved = false;
   public int $id;
 
   public function __construct(
@@ -13,6 +14,7 @@ class Usuario
     public string $sobrenome = "",
     public string $login = "",
     public string $email = "",
+    public string $tipo = "admin",
     public string $senha = ""
   ) {}
 
@@ -25,10 +27,19 @@ class Usuario
     } else {
       $sql = "INSERT INTO usuario (nome, sobrenome, login, email, senha) VALUES ('{$this->nome}', '{$this->sobrenome}', '{$this->login}' ,'{$this->email}','{$this->senha}')";
     }
-    return $conexao->executa($sql);
+    $result = $conexao->executa($sql);
+
+    $this->saved = $result;
+    return $result;
   }
 
-
+  public function set_user_id()
+  {
+    if ($this->saved) {
+      $user = Usuario::findBylogin($this->login);
+      $this->id = $user->id;
+    }
+  }
 
   public static function find($id): Usuario
   {

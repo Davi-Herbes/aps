@@ -9,9 +9,10 @@ $nome = $_POST["nome"] ?? "";
 $sobrenome = $_POST["sobrenome"] ?? "";
 $login = $_POST["login"] ?? "";
 $email = $_POST["email"] ?? "";
+$tipo_usuario = $_POST["tipo-usuario"] = "admin";
 $senha = $_POST["senha"] ?? "";
 
-$user = new Usuario($nome, $sobrenome, $login, $email, $senha);
+$user = new Usuario($nome, $sobrenome, $login, $email, $tipo_usuario,  $senha);
 $validador_user = new ValidadorUsuario($user);
 $validador_user->validar();
 
@@ -29,5 +30,6 @@ if (!$result) {
   navegar("/ana/pages/cadastro/");
 }
 
-$tipo_usuario = $_POST["tipo-usuario"];
-navegar("/ana/pages/cadastro/$tipo_usuario");
+$user->set_user_id();
+
+navegar("/ana/pages/cadastro/$tipo_usuario?user_id=$user->id");

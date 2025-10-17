@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once __DIR__ . "/../../../src/utils/navegar.php";
+require_once __DIR__ . "/../../../src/models/admin/Admin.php";
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+require_once __DIR__ . "/../utils/user_id_required.php";
+user_id_required();
 
-<body>
-  SSSSSSSSSS
-</body>
+$user_id = $_GET["user_id"];
 
-</html>
+$admin = new Admin($user_id);
+
+// validador tem que chcar se o user_id corresponde a um usuário existente
+
+navegar("/ana/");

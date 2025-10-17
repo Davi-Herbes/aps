@@ -1,6 +1,10 @@
 <?php
 
 require_once __DIR__ . "/../../src/models/usuario/validador.php";
+require_once __DIR__ . "/../../src/utils/admin_required.php";
+
+// admin_required();
+
 session_start();
 
 $validador_usuario = new ValidadorUsuario();
@@ -34,7 +38,7 @@ if (isset($_SESSION["validador"])) {
         <div class="title-container">
           <h1>Dados de usuário</h1>
         </div>
-        <form action="/ana/pages/cadastro/cadastrar.php" method="post">
+        <form action="/ana/src/forms/cadastrar.php" method="post">
           <label class="label" for="nome">
             Nome:
             <input id="nome" name="nome" type="text">

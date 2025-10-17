@@ -67,7 +67,7 @@ class ValidadorUsuario extends Validador
 
   private function validar_tipo()
   {
-    $tipo_usuario = $_POST["tipo-usuario"] ?? "";
+    $tipo_usuario = $this->usuario->tipo;
     $valores_permitidos = ["aluno", "professor", "admin"];
 
     $this->validate_enum($tipo_usuario, "Tipo", $this->erro_tipo, $valores_permitidos);

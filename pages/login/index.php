@@ -26,7 +26,7 @@ if (isset($_GET["error"])) {
   </div>
 
   <div class="form">
-    <form action="/ana/src/utils/log_user.php" method="post">
+    <form action="/ana/src/forms/log_user.php" method="post">
       <label for="email">Email: <input id="email" name="email" type="email"></label>
       <label for="senha">Senha: <input id="senha" name="senha" type="password"></label>
       <button type="submit" class="botao">Enviar</button>

@@ -1,6 +1,9 @@
 <?php
+require_once __DIR__ . "/../utils/user_id_required.php";
+user_id_required();
 
 
+$user_id = $_GET["user_id"];
 
 ?>
 
@@ -50,7 +53,6 @@
           </fieldset>
           <label class="label" for="ano">Ano: <input id="ano" name="ano" type="text"></label>
           <label class="label" for="data_nasc">Data de nascimento: <input id="data_nasc" name="data_nasc" type="date"></label>
-          <label class="label" for="senha">Senha: <input id="senha" name="senha" type="password"></label>
 
           <div class="button-container">
             <button type="submit">Enviar</button>
