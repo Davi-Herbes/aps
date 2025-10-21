@@ -29,7 +29,9 @@ Toda vez que você quiser adicionar algo no projeto, você tem que fazer isso:
 # Baixar os dados do repositório remoto
 git pull origin main
 
-# Adicionar todos os arquivos na nova versão
+# (programar)
+
+# Adicionar todas as alterações na nova versão
 git add .
 git commit -m "Alterando tal coisa"
 
