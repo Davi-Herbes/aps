@@ -5,8 +5,8 @@ require_once __DIR__ . "/validador.php";
 
 class Usuario
 {
-
   private bool $saved = false;
+
   public int $id;
 
   public function __construct(
@@ -33,6 +33,8 @@ class Usuario
     return $result;
   }
 
+  // $user = new User(<valores>);
+  // $user->save();
   public function set_user_id()
   {
     if ($this->saved) {

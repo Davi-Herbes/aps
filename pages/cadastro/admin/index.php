@@ -9,6 +9,9 @@ $user_id = $_GET["user_id"];
 
 $admin = new Admin($user_id);
 
-// validador tem que chcar se o user_id corresponde a um usuário existente
+$validador = new ValidadorAdmin($user);
+$validador->validar();
+
+
 
 navegar("/ana/");

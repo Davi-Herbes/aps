@@ -2,16 +2,16 @@
 
 require_once __DIR__ . "/../../config/db/MySQL.php";
 require_once __DIR__ . "/../usuario/Usuario.php";
+require_once __DIR__ . "/validador.php";
 
 class Admin
 {
 
-  public function __construct(public int $usuario_id) {}
+  public function __construct(public int $usuario_id = "") {}
 
   public function save(): bool
   {
     $conexao = new MySQL();
-    $this->senha = password_hash($this->senha, PASSWORD_BCRYPT);
     $sql = "INSERT INTO admin (Usuario_id) VALUES ('{$this->login}','{$this->senha}')";
 
     return $conexao->executa($sql);
