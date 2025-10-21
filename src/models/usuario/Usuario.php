@@ -14,7 +14,7 @@ class Usuario
     public string $sobrenome = "",
     public string $login = "",
     public string $email = "",
-    public string $tipo = "admin",
+    public string $tipo = "",
     public string $senha = ""
   ) {}
 
