@@ -1,5 +1,9 @@
 <?php
 
+// acho q daria pra botar o tipo de usuário na tabela de usuário no banco de dados, sendo "admin", "aluno", ou "professor"
+// porque no log_user.php ele faz um select de usuário que é pra ser salvo na sessão, e não dá pra saber o tipo do usuário com esse select
+// se a gente tem o tipo dele, a gente também salva na seção uma instância de um Admin, Aluno ou Professor, dependendo do tipo que tiver no Usuário
+
 require_once __DIR__ . "/../../config/db/MySQL.php";
 require_once __DIR__ . "/validador.php";
 

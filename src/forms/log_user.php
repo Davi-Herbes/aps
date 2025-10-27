@@ -1,5 +1,7 @@
 <?php
 
+// falta salvar o usuário na sessão
+
 require_once __DIR__ . "/../models/Usuario.php";
 require_once __DIR__ . "/../utils/navegar.php";
 
