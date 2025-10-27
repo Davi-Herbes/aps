@@ -7,24 +7,24 @@ require_once __DIR__ . "/validador.php";
 class Admin
 {
 
-  public function __construct(public int $usuario_id = "") {}
+  public function __construct(public int $usuario_id = 0) {}
 
   public function save(): bool
   {
     $conexao = new MySQL();
-    $sql = "INSERT INTO admin (Usuario_id) VALUES ('{$this->login}','{$this->senha}')";
-
+    $sql = "INSERT INTO admin (Usuario_id) VALUES ('{$this->usuario_id}')";
     return $conexao->executa($sql);
   }
 
 
-  public static function find($id): Usuario
+  public static function find($id): Admin
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM usuario WHERE id = {$id}";
+    $sql = "SELECT * FROM admin WHERE Usuario_id = {$id}";
     $resultado = $conexao->consulta($sql);
 
-    return Usuario::usuarioFromConsulta($resultado);
+    $admin = new Admin($resultado[0]['Usuario_id']);
+    return $admin;
   }
 
   public static function usuarioFromConsulta($resultado): Usuario

@@ -6,9 +6,6 @@ require_once __DIR__ . "/../usuario/Usuario.php";
 class Aluno
 {
 
-
-
-
   public function __construct(public int $usuario_id, public int $matricula, public string $curso, public int $ano, public string $data_nasc) {}
 
   public function save(): bool
@@ -34,10 +31,10 @@ class Aluno
   public static function find($usuario_id): Aluno
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM Aluno WHERE usuario_id = {$usuario_id}";
+    $sql = "SELECT * FROM Aluno WHERE Usuario_id = {$usuario_id}";
     $resultado = $conexao->consulta($sql);
-    $u = new Aluno($resultado[0]['usuario_id'], $resultado[0]['matricula'], $resultado[0][' curso'], $resultado[0]['ano'], $resultado[0]['data_nasc']);
-    $u->usuario_id = $resultado[0]['usuario_id'];
+    $u = new Aluno($resultado[0]['Usuario_id'], $resultado[0]['matricula'], $resultado[0]['curso'], $resultado[0]['ano'], $resultado[0]['data_nasc']);
+    $u->usuario_id = $resultado[0]['Usuario_id'];
     return $u;
   }
 }

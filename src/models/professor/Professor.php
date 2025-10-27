@@ -17,22 +17,22 @@ class Professor
     return $conexao->executa($sql);
   }
 
-  public function find($id)
+  public static function find($id)
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM Professor WHERE id = {$id}";
+    $sql = "SELECT * FROM professor WHERE Usuario_id = {$id}";
     $resultado = $conexao->consulta($sql);
 
 
-    $Professor = new Professor($resultado[0]['data_nasc'], $resultado[0]['Usuario_id']);
-    $Professor->id = $resultado[0]['id'];
-    return $Professor;
+    $professor = new Professor($resultado[0]['data_nasc'], $resultado[0]['Usuario_id']);
+    $professor->id = $resultado[0]['Usuario_id'];
+    return $professor;
   }
 
   public function delete($id)
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM Professor WHERE id = {$id}";
+    $sql = "SELECT * FROM professor WHERE Usuario_id = {$id}";
     return $conexao->executa($sql);
   }
 }
