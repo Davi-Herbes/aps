@@ -1,0 +1,11 @@
+{
+  "php.validate.enable": true,
+  "php.suggest.basic": false,
+  "intelephense.environment.phpVersion": "7.4.33",
+
+  "explorer.compactFolders": false,
+
+  "php.version": "7.4.33",
+  "svg.preview.background": "editor",
+  // "editor.formatOnSave": false
+}

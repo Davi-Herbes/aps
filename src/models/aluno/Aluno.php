@@ -5,36 +5,79 @@ require_once __DIR__ . "/../usuario/Usuario.php";
 
 class Aluno
 {
+  public static $column_names = ["ID_Aluno", "ID_Curso", "Ano_Ingresso", "Matricula", "Modalidade", "Turno_Disponivel", "Status_Estagio"];
 
-  public function __construct(public int $usuario_id, public int $matricula, public string $curso, public int $ano, public string $data_nasc) {}
+  public ?int $id;
+  public ?int $id_curso;
 
-  public function save(): bool
+  public ?int $ano_ingresso;
+
+  public ?string $matricula;
+  public ?string $modalidade;
+  public ?string $turno_disponivel;
+  public ?string $status_estagio;
+
+  public ?Usuario $user;
+
+  public function __construct(?int $id_usuario = null, ?int $id_curso, ?int $ano_ingresso = null, ?string $matricula = null, ?string $modalidade, ?string $turno_disponivel, ?string $status_estagio)
   {
-    $conexao = new MySQL();
-    if (isset($this->usuario_id)) {
-      $sql = "UPDATE Aluno SET usuario_id = '{$this->usuario_id}', matricula = '{$this->matricula}', curso = '{$this->curso}', ano = '{$this->ano}', data_nasc = '{$this->data_nasc}'
-       WHERE usuario_id = {$this->usuario_id}";
-    } else {
-      $sql = "INSERT INTO Aluno (usuario_id, matricula, curso, ano, data_nasc) VALUES ('{$this->usuario_id}','{$this->matricula}','{$this->curso}','{$this->ano}','{$this->data_nasc}')";
-    }
-    return $conexao->executa($sql);
+
+    $this->id = $id_usuario;
+    $this->id_curso = $id_curso;
+
+    $this->ano_ingresso = $ano_ingresso;
+
+    $this->matricula = $matricula;
+    $this->modalidade = $modalidade;
+    $this->turno_disponivel = $turno_disponivel;
+    $this->status_estagio = $status_estagio;
   }
 
-  public static function delete($usuario_id)
+  public static function instanciarArray($result, ?string $prefixo = null)
   {
-    $conexao = new MySQL();
-    $sql = "DELETE FROM Aluno WHERE usuario_id = {$usuario_id}";
-    $resultado = $conexao->executa($sql);
-    return $resultado;
+    $prefixo = $prefixo ? "$prefixo." : "";
+
+    $aluno = new Aluno(
+      $result[$prefixo . "ID_Aluno"] ?? null,
+      $result[$prefixo . "ID_Curso"] ?? null,
+      $result[$prefixo . "Ano_Ingresso"] ?? null,
+      $result[$prefixo . "Matricula"] ?? null,
+      $result[$prefixo . "Modalidade"] ?? null,
+      $result[$prefixo . "Turno_Disponivel"] ?? null,
+      $result[$prefixo . "Status_Estagio"] ?? null
+    );
+
+    return $aluno;
   }
 
-  public static function find($usuario_id): Aluno
+  public static function find($id_usuario): Aluno
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM Aluno WHERE Usuario_id = {$usuario_id}";
+    $sql = "SELECT * FROM aluno WHERE ID_Aluno = {$id_usuario}";
+    $resultado = $conexao->consulta($sql)[0];
+    $aluno = Aluno::instanciarArray($resultado);
+    return $aluno;
+  }
+
+
+
+  public static function findAllJoinWithUser()
+  {
+    $conexao = new MySQL();
+    $sql = "SELECT * FROM aluno a JOIN usuario u ON u.ID_Usuario = a.ID_Aluno";
     $resultado = $conexao->consulta($sql);
-    $u = new Aluno($resultado[0]['Usuario_id'], $resultado[0]['matricula'], $resultado[0]['curso'], $resultado[0]['ano'], $resultado[0]['data_nasc']);
-    $u->usuario_id = $resultado[0]['Usuario_id'];
-    return $u;
+
+    $alunos = [];
+
+
+    foreach ($resultado as $a) {
+      $aluno = Aluno::instanciarArray($a);
+      $usuario = Usuario::instanciarArray($a);
+
+      $aluno->user = $usuario;
+      $alunos[] = $aluno;
+    }
+
+    return $alunos;
   }
 }

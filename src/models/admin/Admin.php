@@ -2,17 +2,21 @@
 
 require_once __DIR__ . "/../../config/db/MySQL.php";
 require_once __DIR__ . "/../usuario/Usuario.php";
-require_once __DIR__ . "/validador.php";
+
 
 class Admin
 {
-
-  public function __construct(public int $usuario_id = 0) {}
+  public int $id;
+  public int $id_usuario;
+  public function __construct(?int $id_usuario)
+  {
+    $this->id_usuario = $id_usuario;
+  }
 
   public function save(): bool
   {
     $conexao = new MySQL();
-    $sql = "INSERT INTO admin (Usuario_id) VALUES ('{$this->usuario_id}')";
+    $sql = "INSERT INTO Admin (id_usuario) VALUES ('{$this->id_usuario}')";
     return $conexao->executa($sql);
   }
 
@@ -20,32 +24,36 @@ class Admin
   public static function find($id): Admin
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM admin WHERE Usuario_id = {$id}";
+    $sql = "SELECT * FROM Admin WHERE id_usuario = {$id}";
     $resultado = $conexao->consulta($sql);
-
-    $admin = new Admin($resultado[0]['Usuario_id']);
+    $admin = new Admin($resultado[0]['id_usuario']);
+    $admin->id = $resultado[0]["id"];
     return $admin;
   }
 
+
   public static function usuarioFromConsulta($resultado): Usuario
   {
-    $u = new Usuario($resultado[0]['login'], $resultado[0]['senha']);
+
+    $r = $resultado[0];
+
+    $u = new Usuario($r["Nome"], $r["Sobrenome"], $r['Email'], $r['Senha'], $r['CPF'],  $r['tipo'], $r['Data_nasc']);
     $u->id = $resultado[0]['id'];
     return $u;
   }
 
-  public static function findBylogin($login): Usuario
+  public static function findByemail($email): Usuario
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM usuario WHERE login = '$login';";
-    $resultado = $conexao->consulta($sql);
+    $sql = "SELECT * FROM Usuario WHERE email = '$email';";
+    $resultado = $conexao->consulta($sql)[0];
 
-    return Usuario::usuarioFromConsulta($resultado);
+    return Usuario::instanciarArray($resultado);
   }
 
-  public static function validar_login($login, $senha): bool | Usuario
+  public static function validar_login($email, $senha)
   {
-    $usuario = Usuario::findBylogin($login);
+    $usuario = Usuario::findByemail($email);
 
     if (password_verify($senha, $usuario->senha)) {
       return $usuario;

@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . "/../utils/user_id_required.php";
-user_id_required();
+//require_once __DIR__ . "/../utils/user_id_required.php";
+//user_id_required();
 
 
-$user_id = $_GET["user_id"];
+//$user_id = $_GET["user_id"];
 
 ?>
 
@@ -14,8 +14,8 @@ $user_id = $_GET["user_id"];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro Aluno</title>
-  <link rel="stylesheet" href="/ana/public/global.css">
-  <link rel="stylesheet" href="/ana/pages/cadastro/styles.css">
+  <link rel="stylesheet" href="/../../../public/global.css">
+  <link rel="stylesheet" href="/../styles.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@ $user_id = $_GET["user_id"];
 
 
         <h1>Dados de aluno</h1>
-        <form action="/ana/src/utils/cadastrar.php" method="post">
+        <form action="/../../../src/utils/cadastrar.php" method="post">
           <label class="label" for="matricula">Matricula: <input id="matricula" name="matricula" type="text"></label>
           <fieldset class="label">
             <legend>Curso:</legend>

@@ -1,64 +1,112 @@
-@import "/ana/public/css/global.css";
+@import "../../public/css/global.css";
+
+body {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #8a4fff;
+  color: #000;
+  padding: 10px 25px;
+  font-weight: bold;
+  font-size: 1.5rem;
+  box-sizing: border-box;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px; /* deixa espaço pra barra superior */
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
 
 .form-container {
   background-color: #fff;
-
-  border-radius: 4px;
-
-  padding: 20px;
-  height: 100vh;
-  width: 60%;
-
-  display: grid;
-  grid-template-rows: 1fr 5fr;
+  border: 3px solid #8a4fff;
+  border-radius: 12px;
+  padding: 40px 30px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 form {
-  display: grid;
-  grid-template-rows: repeat(7, 1fr);
-  grid-template-columns: 0.9fr;
-  justify-content: center;
-}
-
-.title-container {
-  margin-left: 5%;
-}
-
-fieldset {
   display: flex;
-  align-items: center;
-  flex-direction: row;
-  padding: 5px;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.error-msg {
-  color: red;
-  font-weight: 700;
-  height: 40%;
-  font-size: 90%;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .label {
   display: flex;
   flex-direction: column;
-  gap: 10%;
-  max-width: 600px;
-  justify-content: center;
+  gap: 6px;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .label input {
-  height: 40%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
+}
 
-  font-size: 100%;
+.label input:focus {
+  border-color: #8a4fff;
+  box-shadow: 0 0 4px rgba(138, 79, 255, 0.5);
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+fieldset legend {
+  font-weight: bold;
 }
 
 .button-container {
-  max-width: 600px;
-  align-content: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
+
 .button-container button {
-  width: 100%;
-  height: 80%;
+  background-color: #8a4fff;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button-container button:hover {
+  background-color: #6b2ecc;
 }

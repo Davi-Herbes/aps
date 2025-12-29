@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "/../utils/user_id_required.php";
-user_id_required();
+//require_once __DIR__ . "/../utils/user_id_required.php";
+//user_id_required();
 
 
 ?>
@@ -13,8 +13,8 @@ user_id_required();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro Professor</title>
-  <link rel="stylesheet" href="/ana/public/global.css">
-  <link rel="stylesheet" href="/ana/pages/cadastro/styles.css">
+  <link rel="stylesheet" href="../../../public/global.css">
+  <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>

@@ -2,6 +2,6 @@
 
 function navegar(string $path)
 {
-  header("Location: $path");
+  header("Location: /2025/projeto/grupo2$path");
   exit;
 }

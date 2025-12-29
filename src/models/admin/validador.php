@@ -7,8 +7,12 @@ require_once __DIR__ . "/../usuario/Usuario.php";
 class ValidadorAdmin extends Validador
 {
   public string $erro = "";
+  
+  public Admin $admin;
 
-  public function __construct(public Admin $admin = new Admin()) {}
+  public function __construct(?Admin $admin = null) {
+    $this->admin = $admin ?? new Admin();
+  }
 
   public function validar()
   {
@@ -17,7 +21,7 @@ class ValidadorAdmin extends Validador
 
   public function validarUserId()
   {
-    $admin = Admin::find($this->admin->usuario_id);
+    $admin = Admin::find($this->admin->id_usuario);
     if (!$admin) {
       $this->valido = false;
       $this->erro = "Erro de sincronia.";

@@ -13,6 +13,9 @@ $tipo_usuario = $_POST["tipo-usuario"] = "admin";
 $senha = $_POST["senha"] ?? "";
 
 $user = new Usuario($nome, $sobrenome, $login, $email, $tipo_usuario,  $senha);
+
+// $user->save();
+
 $validador_user = new ValidadorUsuario($user);
 $validador_user->validar();
 
@@ -21,15 +24,6 @@ if (!$validador_user->valido) {
   navegar("/ana/pages/cadastro/");
 }
 
-$result = $user->save();
+$_SESSION["usuario_para_cadastro"] = $user;
 
-if (!$result) {
-  $validador_user->erro_generico();
-
-  $_SESSION["validador"] = $validador_user;
-  navegar("/ana/pages/cadastro/");
-}
-
-$user->set_user_id();
-
-navegar("/ana/pages/cadastro/$tipo_usuario?user_id=$user->id");
+navegar("/ana/pages/cadastro/$tipo_usuario");

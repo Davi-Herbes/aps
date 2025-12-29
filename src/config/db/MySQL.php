@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "\Configuracao.php";
+require_once __DIR__ . "/Configuracao.php";
 
 class MySQL
 {
@@ -17,13 +17,19 @@ class MySQL
   public function executa($sql)
   {
     $result = $this->connection->query($sql);
+
+    // if ($result === true) {
+    //   return $this->connection->insert_id;
+    // }
+
     return $result;
   }
+
   public function consulta($sql)
   {
     $result = $this->connection->query($sql);
-    $item = array();
     $data = array();
+
     while ($item = mysqli_fetch_array($result)) {
       $data[] = $item;
     }

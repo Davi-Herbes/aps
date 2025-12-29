@@ -5,83 +5,97 @@
 // se a gente tem o tipo dele, a gente também salva na seção uma instância de um Admin, Aluno ou Professor, dependendo do tipo que tiver no Usuário
 
 require_once __DIR__ . "/../../config/db/MySQL.php";
-require_once __DIR__ . "/validador.php";
 
 class Usuario
 {
-  private bool $saved = false;
+  public static $column_names = ["ID_Usuario", "Nome", "Sobrenome", "Email", "Senha", "CPF", "Tipo_Usuario", "Data_Nascimento", "Status_Cadastro"];
 
   public int $id;
+  public ?string $nome;
+  public ?string $sobrenome;
+  public ?string $email;
+  public ?string $senha;
+  public ?string $cpf;
+  public ?string $tipo;
+  public ?string $data_nasc;
+  public ?string $status_cadastro;
 
   public function __construct(
-    public string $nome = "",
-    public string $sobrenome = "",
-    public string $login = "",
-    public string $email = "",
-    public string $tipo = "",
-    public string $senha = ""
-  ) {}
-
-  public function save(): bool
-  {
-    $conexao = new MySQL();
-    $this->senha = password_hash($this->senha, PASSWORD_BCRYPT);
-    if (isset($this->id)) {
-      $sql = "UPDATE usuario SET nome = '{$this->nome}', sobrenome = '{$this->sobrenome}', login = '{$this->login}' ,email = '{$this->email}',senha = '{$this->senha}' WHERE id = {$this->id}";
-    } else {
-      $sql = "INSERT INTO usuario (nome, sobrenome, login, email, senha) VALUES ('{$this->nome}', '{$this->sobrenome}', '{$this->login}' ,'{$this->email}','{$this->senha}')";
-    }
-    $result = $conexao->executa($sql);
-
-    $this->saved = $result;
-    return $result;
+    ?string $nome = null,
+    ?string $sobrenome = null,
+    ?string $email = null,
+    ?string $senha = null,
+    ?string $cpf = null,
+    ?string $tipo = null,
+    ?string $data_nasc = null,
+    ?string $status_cadastro = null
+  ) {
+    $this->email = $email;
+    $this->nome = $nome;
+    $this->sobrenome = $sobrenome;
+    $this->senha = $senha;
+    $this->cpf = $cpf;
+    $this->tipo = $tipo;
+    $this->data_nasc = $data_nasc;
+    $this->status_cadastro = $status_cadastro;
   }
 
-  // $user = new User(<valores>);
-  // $user->save();
-  public function set_user_id()
-  {
-    if ($this->saved) {
-      $user = Usuario::findBylogin($this->login);
-      $this->id = $user->id;
-    }
-  }
 
   public static function find($id): Usuario
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM usuario WHERE id = {$id}";
-    $resultado = $conexao->consulta($sql);
+    $sql = "SELECT * FROM usuario WHERE ID_Usuario = {$id}";
+    $resultado = $conexao->consulta($sql)[0];
 
-    return Usuario::usuarioFromConsulta($resultado);
+    return Usuario::instanciarArray($resultado);
   }
 
-  public static function usuarioFromConsulta($resultado): Usuario
+  public static function instanciarArray($result, ?string $prefixo = null)
   {
-    $r = $resultado[0];
+    $prefixo = $prefixo ? "$prefixo." : "";
 
-    $usuario = new Usuario($r["nome"], $r["sobrenome"], $r['login'], $r['email'], $r['senha']);
-    $usuario->id = $resultado[0]['id'];
+    $usuario = new Usuario(
+      $result[$prefixo . "Nome"] ?? null,
+      $result[$prefixo . "Sobrenome"] ?? null,
+      $result[$prefixo . "Email"] ?? null,
+      $result[$prefixo . "Senha"] ?? null,
+      $result[$prefixo . "CPF"] ?? null,
+      $result[$prefixo . "Tipo_Usuario"] ?? null,
+      $result[$prefixo . "Data_Nascimento"] ?? null,
+      $result[$prefixo . "Status_Cadastro"] ?? null
+    );
+
+    $usuario->id = $result[$prefixo . "ID_Usuario"] ?? null;
+
     return $usuario;
   }
 
-  public static function findBylogin($login): Usuario
+  public static function findByemail($email): ?Usuario
   {
     $conexao = new MySQL();
-    $sql = "SELECT * FROM usuario WHERE login = '$login';";
+    $sql = "SELECT * FROM usuario WHERE Email = '$email';";
     $resultado = $conexao->consulta($sql);
 
-    return Usuario::usuarioFromConsulta($resultado);
+    if (!$resultado || !isset($resultado[0])) {
+      return null;
+    }
+
+    return Usuario::instanciarArray($resultado[0]);
   }
 
-  public static function validar_login($login, $senha): bool | Usuario
+  public static function validar_login($email, $senha)
   {
-    $usuario = Usuario::findBylogin($login);
+    $usuario = Usuario::findByemail($email);
+
+    // se não encontrou o usuário, retorna false (tratado como credenciais inválidas)
+    if (!$usuario) {
+      return null;
+    }
 
     if (password_verify($senha, $usuario->senha)) {
       return $usuario;
     } else {
-      return false;
+      return null;
     }
   }
 }

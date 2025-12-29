@@ -1,0 +1,113 @@
+@import "/2025/projeto/grupo2/public/css/global.css";
+
+.main-section h1 {
+  font-size: 27px;
+  color: var(--roxo-preto);
+}
+
+.main-section {
+  padding: 8vh 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-section .form {
+  /* margin-top: 5vh; */
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-section .form label {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.main-section .form .input-label {
+  flex-direction: row;
+  height: 35px;
+
+  font-size: 15px;
+  padding-left: 0;
+  width: 100%;
+}
+
+.main-section .form label input {
+  height: 35px;
+
+  font-size: 15px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.datalist-input-container {
+  position: relative;
+
+  align-items: center;
+  display: flex;
+  gap: 1vw;
+}
+
+.main-section .form label .radio input {
+  height: 2vh;
+  width: 2vh;
+}
+
+.datalist-input-data {
+  position: absolute;
+  z-index: 2;
+  background: #fff;
+  box-shadow: #8b4dff27 0 0 7px 1px;
+  width: 100%;
+  border-radius: 2px;
+  top: 35px;
+}
+
+.form .datalist-input-data ul li {
+  font-size: 2vh;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form .datalist-input-data ul li.selected,
+.form .datalist-input-data ul li:hover {
+  background-color: #8b4dff1a;
+}
+
+.cpf-container {
+  font-size: 1.7vh;
+  color: var(--roxo-fraco);
+}
+
+.form button {
+  padding: 4px;
+}
+
+.input-label .aluno-input-search-icon {
+  height: 2.8vh;
+}
+
+.input-label {
+  height: 27px;
+}
+
+.cadastro {
+  font-size: 20px;
+}
+
+.cadastro .datalist-input-container.radio .cadastro {
+  font-size: 17px;
+}
+
+.h2 {
+  font-size: 35px;
+}
+
+span.vermelho {
+  color: #ff0000;
+}

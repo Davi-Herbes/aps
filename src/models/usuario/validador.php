@@ -9,22 +9,27 @@ class ValidadorUsuario extends Validador
 {
   public $erro_nome = "";
   public $erro_sobrenome = "";
-  public $erro_login = "";
   public $erro_email = "";
   public $erro_senha = "";
   public $erro_tipo = "";
+  public $erro_data_nasc = "";
 
-  public function __construct(private Usuario $usuario = new Usuario()) {}
+  private Usuario $usuario;
+
+  public function __construct(?Usuario $usuario = null)
+  {
+    $this->usuario = $usuario ?? new Usuario();
+  }
 
   public function validar()
   {
 
     $this->validar_nome();
     $this->validar_sobrenome();
-    $this->validar_login();
     $this->validar_email();
     $this->validar_senha();
     $this->validar_tipo();
+    $this->validar_data_nasc();
   }
 
 
@@ -48,16 +53,12 @@ class ValidadorUsuario extends Validador
     $this->validate_email($email, "E-mail", $this->erro_email);
     $this->validate_string_range_1_50($email, "E-mail", $this->erro_email);
   }
-
-  private function validar_login()
+  private function validar_data_nasc()
   {
-    $login = $this->usuario->login;
+    $data_nasc = $this->usuario->data_nasc;
 
-    $this->validate_chars($login, "Login", $this->erro_login);
-    $this->validate_string_range_1_50($login, "Login", $this->erro_login);
+    $this->validate_date($data_nasc, "Data de Nascimento", $this->erro_data_nasc);
   }
-
-
   private function validar_senha()
   {
     $senha = $this->usuario->senha;

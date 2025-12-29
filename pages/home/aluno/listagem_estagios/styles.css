@@ -1,0 +1,107 @@
+@import "/2025/projeto/grupo2/public/css/global.css";
+
+.main-section {
+  padding: 40px 55px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.estagios {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.estagio-card a {
+  height: 75px;
+  width: 100%;
+
+  display: grid;
+  align-items: center;
+  /* justify-items: center; */
+  grid-template-columns: repeat(4, 1fr);
+
+  padding: 0 0 0 2vw;
+
+  border-radius: 5px;
+  border-left: #8b4dff solid 3px;
+  border-bottom: #8b4dff1d solid 3px;
+  cursor: default;
+}
+
+.estagio-card:hover {
+  background-color: #8b4dff0f;
+}
+
+.estagio-card-item.main {
+  display: flex;
+  width: 100%;
+  /* justify-content: start; */
+}
+
+.estagio-card-item {
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(3px 6px 1.2px #8364c222);
+}
+
+.estagio-card-item.main {
+  flex-direction: row;
+  gap: 14px;
+}
+
+.user-img {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.user-img img {
+  height: 37px;
+  border-radius: 50%;
+  filter: none;
+}
+
+.estagio-card-item-grafico {
+  width: 90%;
+}
+
+.item-description .graph {
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  overflow: hidden;
+  background-color: #f8f4ff;
+}
+
+.graph-fill {
+  background-color: rgb(29, 123, 29);
+  height: 100%;
+}
+
+.item-title {
+  font-size: 14px;
+  align-content: center;
+}
+
+.item-description {
+  font-size: 13.5px;
+  align-content: center;
+}
+
+.estagio-date-range .item-title,
+.estagio-date-range .item-description {
+  display: flex;
+  justify-content: space-between;
+  min-width: 50%;
+  width: 70%;
+  /* padding-right: 30%; */
+  gap: 14px;
+}
+
+.estagio-date-range .item-date {
+  font-size: 13px;
+  font-weight: 500;
+}
